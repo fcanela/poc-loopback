@@ -1,0 +1,47 @@
+{
+  "name": "itemTrack",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "required": true,
+      "description": "Unique GUID"
+    },
+    "item": {
+      "type": "item",
+      "required": true
+    },
+    "bussinesEntity": {
+      "type": "bussinesEntity"
+    },
+    "sale": {
+      "type": "sale"
+    },
+    "box": {
+      "type": "box"
+    },
+    "manufacture": {
+      "type": "string",
+      "description": "Date of manufacture",
+      "format": "date-time"
+    },
+    "distribution": {
+      "type": "string",
+      "description": "Date of distribution",
+      "format": "date-time"
+    },
+    "purchase": {
+      "type": "string",
+      "description": "Date of purchase",
+      "format": "date-time"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,952 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Hello World App
+# during dev, should point to your local machine
+host: localhost:10010
+# basePath prefixes all resource paths 
+basePath: /
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /users/login:
+    post:
+      tags:
+        - users
+      description: Login
+      parameters:
+        - name: login
+          in: body
+          schema:
+            properties:
+              username:
+                type: string
+              pass:
+                type: string
+      responses:
+        200:
+          description: Ok
+        400:
+          description: Any validation error
+        404:
+          description: Username or password not found
+        500:
+          description: Internal server error        
+  /users:
+    post:
+      tags:
+        - users
+      description: Create user
+      parameters:
+        - name: user
+          in: body
+          required: true
+          schema:
+            properties:
+              user:
+                $ref: "#/definitions/user"
+              bussinesEntity:
+                type: string
+                description: Unique BussinesEntity GUID
+              profile:
+                type: string
+                description: Unique Profile GUID
+      responses:
+        201:
+          description: Created
+        400:
+          description: Any validation error
+        409:
+          description: Login exist in DB
+        500:
+          description: Internal server error
+    get:
+      tags:
+        - users
+      description: Get users
+      parameters:
+        - name: sort
+          in: query
+          type: string
+          description: Sort users. Use "-" to desc order by
+      responses:
+        200:
+          description: Users list
+          schema:
+            type: array
+            items:
+              properties:
+                id:
+                  type: string
+                  description: Unique GUID
+                login:
+                  type: string
+                  description: User login
+                name:
+                  type: string
+                  description: user name
+                lastName:
+                  type: string
+                  description: User last name
+                profile:
+                  type: string
+                  description: Profile assigned to user
+                renmoved:
+                  type: string
+                  format: date-time
+                  description: Logically removed
+        204:
+          description: Users not found
+        400:
+          description: Any validation error
+        500:
+          description: Internal server error
+
+  /users/{id}:
+    get:
+      tags:
+        - users
+      description: Get user information
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/user"
+        400:
+          description: Any validation error
+        404:
+          description: user not found
+        500:
+          description: Internal server error        
+            
+    put:
+      tags:
+        - users
+      description: Update user
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Any validation error
+        404:
+          description: user not found
+        500:
+          description: Internal server error        
+    delete:
+      tags:
+        - users
+      description: delete user
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true
+      responses:
+        200:
+          description: OK
+        500:
+          description: Internal server errors
+    
+  /brands:
+    post:
+      tags:
+        - brands
+      description: Create user
+      parameters:
+        - name: brand
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/brand"
+      responses:
+        201:
+          description: Created
+        400:
+          description: Any validation error
+        500:
+          description: Internal server error
+    get:
+      tags:
+        - brands
+      description: Get users
+      responses:
+        200:
+          description: Brands list
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/brand"
+        204:
+          description: brands not found
+        400:
+          description: Any validation error
+        500:
+          description: Internal server error
+
+  /brands/{id}:
+    get:
+      tags:
+        - brands
+      description: Get brand information
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/brand"
+        404:
+          description: user not found
+        500:
+          description: Internal server error        
+
+    put:
+      tags:
+        - brands
+      description: Update user
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Any validation error
+        404:
+          description: user not found
+        500:
+          description: Internal server error        
+    delete:
+      tags:
+        - brands
+      description: delete brand
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true
+      responses:
+        200:
+          description: OK
+        500:
+          description: Internal server error        
+
+  /itemTypes:
+    post:
+      tags:
+        - items
+      description: Create item type
+      parameters:
+        - name: itemType
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/itemType"
+      responses:
+        201:
+          description: Created
+        400:
+          description: Any validation error
+        500:
+          description: Internal server error
+    get:
+      tags:
+        - items
+      description: Get item types
+      responses:
+        200:
+          description: item type list
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/itemType"
+        204:
+          description: Item types not found
+        400:
+          description: Any validation error
+        500:
+          description: Internal server error
+
+  /itemTypes/{id}:
+    get:
+      tags:
+        - items
+      description: Get item type information
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/itemType"
+        404:
+          description: item type not found
+        500:
+          description: Internal server error        
+    put:
+      tags:
+        - items
+      description: Update item tType
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Any validation error
+        404:
+          description: Item type not found
+        500:
+          description: Internal server error        
+    delete:
+      tags:
+        - items
+      description: delete item type
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true
+      responses:
+        200:
+          description: OK
+        500:
+          description: Internal server error        
+
+  /boxTypes:
+    post:
+      tags:
+        - boxs
+      description: Create box type
+      parameters:
+        - name: boxType
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/boxType"
+      responses:
+        201:
+          description: Created
+        400:
+          description: Any validation error
+        500:
+          description: Internal server error
+    get:
+      tags:
+        - boxs
+      description: Get box types
+      responses:
+        200:
+          description: box type list
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/boxType"
+        204:
+          description: box types not found
+        400:
+          description: Any validation error
+        500:
+          description: Internal server error
+
+  /boxTypes/{id}:
+    get:
+      tags:
+        - boxs
+      description: Get box type information
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/boxType"
+        404:
+          description: box type not found
+        500:
+          description: Internal server error        
+    put:
+      tags:
+        - boxs
+      description: Update box type
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Any validation error
+        404:
+          description: box type not found
+        500:
+          description: Internal server error        
+    delete:
+      tags:
+        - boxs
+      description: delete box type
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true
+      responses:
+        200:
+          description: OK
+        500:
+          description: Internal server error        
+
+  /items:
+    post:
+      description: Create new item 
+      parameters:
+        - name: item
+          in: body
+          schema:
+            properties:
+              type:
+                type: string
+                description: Item type ID
+              brand:
+                type: string
+                description: Brand ID
+              name:
+                type: string
+              description:
+                type: string
+              allocator:
+                type: string
+                description: Allocator ID
+              builder:
+                type: string
+                description: Builder ID
+
+                
+          
+      responses:
+        200:
+          description: OK
+    
+  /selectors/builders:
+    get:
+      tags:
+        - selectors
+      description: Get builders bussines entities selector
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/nameValue"
+    
+  /selectors/allocators:
+    get:
+      tags:
+        - selectors
+      description: Get allocator bussines entities selector
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/nameValue"
+
+  /selectors/salons:
+    get:
+      tags:
+        - selectors
+      description: Get salon bussines entities selector
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/nameValue"
+
+  /selectors/brands:
+    get:
+      tags:
+        - selectors
+      description: Get brands selector 
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/nameValue"
+
+  /selectors/profiles:
+    get:
+      tags:
+        - selectors
+      description: Get profiles selector
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/nameValue"
+    
+  /swagger:
+    x-swagger-pipe: swagger_raw
+    
+# complex objects have schema definitions
+definitions:
+  user:
+    properties:
+      id:
+        type: string
+        description: Unique GUID
+      login:
+        type: string
+        description: User login
+      pass:
+        type: string
+        description: Password. 3DES cryptographic
+      name:
+        type: string
+        description: user name
+      lastName:
+        type: string
+        description: User last name
+      email:
+        type: string
+        description: User email
+      renmoved:
+        type: string
+        format: date-time
+        description: Logically removed
+    required:
+      - id
+      - login
+      - pass
+      
+  profile:
+    description: |
+      Roles
+        - Administrador Web
+        - Manager de fabricante / distribuidor / salon
+        - Empleado de fabricante / distribuidor / salon
+    properties:
+      id:
+        type: string
+        description: Unique GUID
+      description:
+        type: string
+        maxLength: 45
+        description: Profile user description. 
+    required:
+      - id
+      - description
+
+  userProfile:
+    properties:
+      bussinesEntity:
+        $ref: "#/definitions/bussinesEntity"
+      user:
+        $ref: "#/definitions/user"
+      profile:
+        $ref: "#/definitions/profile"
+  
+  box:
+    properties:
+      id:
+        type: string
+        description: Unique GUID
+      type:
+        $ref: "#/definitions/boxType"
+      count:
+        description: |
+          - Doubt: Why count is a date-time?. The description say "Marca temporal de creación de la caja"
+        type: string
+        format: date-time
+    required:
+      - id
+      - type
+      - count
+
+  boxType:
+    properties:
+      id:
+        type: string
+        description: Unique GUID
+      description:
+        type: string
+        maxLength: 100
+        description: box type description
+      high:
+        type: integer
+        format: int32
+        description: high in cm
+      width:
+        type: integer
+        format: int32
+        description: width in cm
+      depth:
+        type: integer
+        format: int32
+        description: depth in cm
+      maxUnits:
+        type: integer
+        format: int32
+        description: Max. items in box
+      renmoved:
+        type: string
+        format: date-time
+        description: Logically removed
+    required:
+      - id
+      - description
+      - high
+      - width
+      - depth
+      - maxUnits
+  
+  historyBoxTrack:
+    properties:
+      id:
+        type: string
+        description: Unique GUID
+      bussinesEntity:
+        $ref: "#/definitions/bussinesEntity"
+      box:
+        $ref: "#/definitions/box"
+      situation:
+        type: string
+        maxLength: 100
+        description: Situation about box
+      start:
+        type: string
+        format: date-time
+        description: Start date-time situation
+      end:
+        type: string
+        format: date-time
+        description: End date-time situation
+    required:
+      - id
+      - bussinesEntity
+      - box
+      - start
+      
+  itemTrack:
+    properties:
+      id:
+        type: string
+        description: Unique GUID
+      item:
+        $ref: "#/definitions/item"
+      bussinesEntity:
+        $ref: "#/definitions/bussinesEntity"
+      sale:
+        $ref: "#/definitions/sale"
+      box:
+        $ref: "#/definitions/box"
+      manufacture:
+        type: string
+        format: date-time
+        description: Date of manufacture
+      distribution:
+        type: string
+        format: date-time
+        description: Date of distribution
+      purchase:
+        type: string
+        format: date-time
+        description: Date of purchase
+    required:
+      - id
+      - item
+      
+  stock:
+    properties:
+      bussinesEntity:
+        $ref: "#/definitions/bussinesEntity"
+      item:
+        $ref: "#/definitions/item"
+      count:
+        type: integer
+        format: int32
+      limit:
+        type: integer
+        format: int32
+    required:
+      - bussinesEntity
+      - item
+      - count
+      - limit
+        
+  stockTrack:
+    properties:
+      bussinesEntity:
+        $ref: "#/definitions/bussinesEntity"
+      item:
+        $ref: "#/definitions/item"
+      track:
+        type: string
+        format: date-time
+        description: Date time for track stock
+      type:
+        description: |
+          Type of track
+            - E: Entrada
+            - S: Salida 
+        type: string
+        enum:
+          - S
+          - E
+      count:
+        type: integer
+        format: int32
+        description: Count items track
+      description:
+        type: string
+        maxLength: 200
+    required:
+      - bussinesEntity
+      - item
+      - track
+      - type
+      - count
+      - description
+
+  brand:
+    properties:
+      id:
+        type: string
+        description: Unique GUID
+      name:
+        type: string
+        description: Brand name
+      description:
+        type: string
+        description: Brand description
+      image:
+        type: string
+        description: URL to brand description
+      renmoved:
+        type: string
+        format: date-time
+        description: Logically removed
+    required:
+      - id
+      - name
+      
+  salonBrand:
+    properties:
+      brand:
+        $ref: "#/definitions/brand"
+      salon:
+        $ref: "#/definitions/bussinesEntity"
+  
+  salonItem:
+    properties:
+      bussinesEntity:
+        $ref: "#/definitions/bussinesEntity"
+      item:
+        $ref: "#/definitions/item"
+      retailPrice:
+        type: number
+        description: PVP
+    required:
+      - bussinesEntity
+      - item
+      - retailPrice
+  
+  sale:
+    properties:
+      id:
+        type: string
+        description: Unique GUID
+      employee:
+        $ref: "#/definitions/user"
+      approved:
+        $ref: "#/definitions/user"
+      price:
+        type: number
+        description: Final price.
+      status:
+        type: string
+        maxLength: 20
+        description: |
+          Sale status
+            - SIN CONFIRMAR
+            - CONFIRMADA
+    required:
+      - id
+      - employee
+      - approved
+      - price
+      - status
+            
+  saleItem:
+    description: Relation between sale and item
+    properties:
+      item:
+        $ref: "#/definitions/item"
+      sale:
+        $ref: "#/definitions/sale"
+    required:
+      - item
+      - sale
+
+  itemType:
+    properties:
+      id:
+        type: string
+        description: Unique GUID
+      type:
+        type: string
+        maxLength: 45
+        description: Item type description
+      removed:
+        type: string
+        format: date-time
+        description: Logically removed
+    required:
+      - id
+      - type
+        
+  bussinesEntity:
+    properties:
+      id: 
+        type: string
+        description: Unique GUID
+      type:
+        description: |
+          - F: Builder (fabricante)
+          - D: Allocator (distribuidor)
+          - S: Salon (Salón)
+        type: string
+        enum:
+          - F
+          - D
+          - S
+      name:
+        type: string
+        description: Allocator name
+      stree:
+        type: string
+        description: Stree
+      postalCode:
+        type: string
+        description: Postal code
+      town:
+        type: string
+        description: Town
+      city:
+        type: string
+        description: City
+      country:
+        type: string
+        description: Country
+      removed:
+        type: string
+        format: date-time
+        description: Logically removed
+    required:
+      - id
+      - type
+      - name
+      - stree
+      - postalCode
+      - town
+      - city
+      - country
+
+  item:
+    properties:
+      id: 
+        type: string
+        description: Unique GUID
+      type:
+        $ref: "#/definitions/itemType"
+      brand:
+        $ref: "#/definitions/brand"
+      name:
+        type: string
+        maxLength: 200
+        description: Commercial name
+      description:
+        type: string
+        description: Item description
+      allocator:
+        $ref: "#/definitions/bussinesEntity"
+      builder:
+        $ref: "#/definitions/bussinesEntity"
+      media:
+        properties:
+          image:
+            type: string
+            description: URL to item image
+          use:
+            type: string
+            description: Url to "how to use video"
+          commercial:
+            type: string
+            description: Url to commercial video
+      removed:
+        type: string
+        format: date-time
+        description: Logically removed
+    required:
+      - id
+      - type
+      - brand
+      - name
+      - description
+      - allocator
+      - builder
+      
+  nameValue:
+    properties:
+      id:
+        type: string
+        description: Unique ID
+      name:
+        type: string
+        description: Value to show in selectors
+      
+            
+      
+      

@@ -1,0 +1,27 @@
+{
+  "name": "salonItem",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "bussinesEntity": {
+      "type": "bussinesEntity",
+      "required": true
+    },
+    "item": {
+      "type": "item",
+      "required": true
+    },
+    "retailPrice": {
+      "type": "number",
+      "required": true,
+      "description": "PVP"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

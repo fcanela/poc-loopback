@@ -1,0 +1,69 @@
+{
+  "name": "item",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "required": true,
+      "description": "Unique GUID"
+    },
+    "type": {
+      "type": "itemType",
+      "required": true
+    },
+    "brand": {
+      "type": "brand",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true,
+      "description": "Commercial name",
+      "maxLength": 200
+    },
+    "description": {
+      "type": "string",
+      "required": true,
+      "description": "Item description"
+    },
+    "allocator": {
+      "type": "bussinesEntity",
+      "required": true
+    },
+    "builder": {
+      "type": "bussinesEntity",
+      "required": true
+    },
+    "media": {
+      "type": {
+        "properties": {
+          "image": {
+            "type": "string",
+            "description": "URL to item image"
+          },
+          "use": {
+            "type": "string",
+            "description": "Url to \"how to use video\""
+          },
+          "commercial": {
+            "type": "string",
+            "description": "Url to commercial video"
+          }
+        }
+      }
+    },
+    "removed": {
+      "type": "string",
+      "description": "Logically removed",
+      "format": "date-time"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

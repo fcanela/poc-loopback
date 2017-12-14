@@ -1,0 +1,30 @@
+{
+  "name": "itemType",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "required": true,
+      "description": "Unique GUID"
+    },
+    "type": {
+      "type": "string",
+      "required": true,
+      "description": "Item type description",
+      "maxLength": 45
+    },
+    "removed": {
+      "type": "string",
+      "description": "Logically removed",
+      "format": "date-time"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

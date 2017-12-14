@@ -1,0 +1,39 @@
+version: '2'
+services:
+  postgresql:
+    image: postgres:9.4-alpine
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_DB=dbname
+    ports:
+      - 5432:5432
+
+  saloon:
+    depends_on:
+      - postgresql
+    links:
+      - postgresql:postgresql.local
+    ports:
+      - 9000:9000
+    build: .
+    environment:
+      - NODE_ENV=production
+      - DEBUG=false
+      - HOST=0.0.0.0
+      - PORT=9000
+      - TOKEN_SECRET=changeme
+      - RESET_PASSWORD_TOKEN_SECRET=changeme
+      - RESET_PASSWORD_TOKEN_CIPHER=changeme
+      - POSTGRESQL_HOST=postgresql.local
+      - POSTGRESQL_PORT=5432
+      - POSTGRESQL_USER=admin
+      - POSTGRESQL_PASSWORD=12345
+      - POSTGRESQL_DATABASE=dbname
+    command: >
+      /bin/sh -c "
+        set -e
+        dockerize -timeout 30s -wait tcp://$$POSTGRESQL_HOST:$$POSTGRESQL_PORT
+        ping -c 1 postgresql.local
+        npm start
+      "

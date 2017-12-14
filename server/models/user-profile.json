@@ -1,0 +1,23 @@
+{
+  "name": "userProfile",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "bussinesEntity": {
+      "type": "bussinesEntity"
+    },
+    "user": {
+      "type": "user"
+    },
+    "profile": {
+      "type": "profile"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

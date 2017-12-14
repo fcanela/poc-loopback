@@ -1,0 +1,64 @@
+{
+  "name": "bussinesEntity",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "required": true,
+      "description": "Unique GUID"
+    },
+    "type": {
+      "type": "string",
+      "required": true,
+      "description": "- F: Builder (fabricante)\n- D: Allocator (distribuidor)\n- S: Salon (Salón)\n",
+      "enum": [
+        "F",
+        "D",
+        "S"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "required": true,
+      "description": "Allocator name"
+    },
+    "stree": {
+      "type": "string",
+      "required": true,
+      "description": "Stree"
+    },
+    "postalCode": {
+      "type": "string",
+      "required": true,
+      "description": "Postal code"
+    },
+    "town": {
+      "type": "string",
+      "required": true,
+      "description": "Town"
+    },
+    "city": {
+      "type": "string",
+      "required": true,
+      "description": "City"
+    },
+    "country": {
+      "type": "string",
+      "required": true,
+      "description": "Country"
+    },
+    "removed": {
+      "type": "string",
+      "description": "Logically removed",
+      "format": "date-time"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

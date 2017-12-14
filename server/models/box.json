@@ -1,0 +1,29 @@
+{
+  "name": "box",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "required": true,
+      "description": "Unique GUID"
+    },
+    "type": {
+      "type": "boxType",
+      "required": true
+    },
+    "count": {
+      "type": "string",
+      "required": true,
+      "description": "- Doubt: Why count is a date-time?. The description say \"Marca temporal de creación de la caja\"\n",
+      "format": "date-time"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,46 @@
+{
+  "name": "user",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "required": true,
+      "description": "Unique GUID"
+    },
+    "login": {
+      "type": "string",
+      "required": true,
+      "description": "User login"
+    },
+    "pass": {
+      "type": "string",
+      "required": true,
+      "description": "Password. 3DES cryptographic"
+    },
+    "name": {
+      "type": "string",
+      "description": "user name"
+    },
+    "lastName": {
+      "type": "string",
+      "description": "User last name"
+    },
+    "email": {
+      "type": "string",
+      "description": "User email"
+    },
+    "renmoved": {
+      "type": "string",
+      "description": "Logically removed",
+      "format": "date-time"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

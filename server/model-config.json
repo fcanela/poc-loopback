@@ -1,0 +1,106 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "db"
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": false
+  },
+  "user": {
+    "dataSource": "postgresql",
+    "public": true
+  },
+  "profile": {
+    "dataSource": "postgresql",
+    "public": true
+  },
+  "userProfile": {
+    "dataSource": "postgresql",
+    "public": true
+  },
+  "box": {
+    "dataSource": "postgresql",
+    "public": true
+  },
+  "boxType": {
+    "dataSource": "postgresql",
+    "public": true
+  },
+  "historyBoxTrack": {
+    "dataSource": "postgresql",
+    "public": true
+  },
+  "itemTrack": {
+    "dataSource": "postgresql",
+    "public": true
+  },
+  "stock": {
+    "dataSource": "postgresql",
+    "public": true
+  },
+  "stockTrack": {
+    "dataSource": "postgresql",
+    "public": true
+  },
+  "brand": {
+    "dataSource": "postgresql",
+    "public": true
+  },
+  "salonBrand": {
+    "dataSource": "postgresql",
+    "public": true
+  },
+  "salonItem": {
+    "dataSource": "postgresql",
+    "public": true
+  },
+  "sale": {
+    "dataSource": "postgresql",
+    "public": true
+  },
+  "saleItem": {
+    "dataSource": "postgresql",
+    "public": true
+  },
+  "itemType": {
+    "dataSource": "postgresql",
+    "public": true
+  },
+  "bussinesEntity": {
+    "dataSource": "postgresql",
+    "public": true
+  },
+  "item": {
+    "dataSource": "postgresql",
+    "public": true
+  }
+}

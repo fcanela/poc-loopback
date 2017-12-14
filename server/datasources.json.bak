@@ -1,0 +1,17 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "postgresql"
+  },
+  "postgresql": {
+    "host": "${POSTGRESQL_HOST}",
+    "port": "${POSTGRESQL_PORT}",
+    "username": "${POSTGRESQL_USER}",
+    "password": "${POSTGRESQL_PASSWORD}",
+    "database": "${POSTGRESQL_DATABASE}",
+    "min": 0,
+    "max": 5,
+    "name": "postgresql",
+    "connector": "postgresql"
+  }
+}

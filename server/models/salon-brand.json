@@ -1,0 +1,20 @@
+{
+  "name": "salonBrand",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "brand": {
+      "type": "brand"
+    },
+    "salon": {
+      "type": "bussinesEntity"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,32 @@
+{
+  "name": "stock",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "bussinesEntity": {
+      "type": "bussinesEntity",
+      "required": true
+    },
+    "item": {
+      "type": "item",
+      "required": true
+    },
+    "count": {
+      "type": "number",
+      "required": true,
+      "format": "int32"
+    },
+    "limit": {
+      "type": "number",
+      "required": true,
+      "format": "int32"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,22 @@
+{
+  "name": "saleItem",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "item": {
+      "type": "item",
+      "required": true
+    },
+    "sale": {
+      "type": "sale",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

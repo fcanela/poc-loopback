@@ -1,0 +1,54 @@
+{
+  "name": "boxType",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "required": true,
+      "description": "Unique GUID"
+    },
+    "description": {
+      "type": "string",
+      "required": true,
+      "description": "box type description",
+      "maxLength": 100
+    },
+    "high": {
+      "type": "number",
+      "required": true,
+      "description": "high in cm",
+      "format": "int32"
+    },
+    "width": {
+      "type": "number",
+      "required": true,
+      "description": "width in cm",
+      "format": "int32"
+    },
+    "depth": {
+      "type": "number",
+      "required": true,
+      "description": "depth in cm",
+      "format": "int32"
+    },
+    "maxUnits": {
+      "type": "number",
+      "required": true,
+      "description": "Max. items in box",
+      "format": "int32"
+    },
+    "renmoved": {
+      "type": "string",
+      "description": "Logically removed",
+      "format": "date-time"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,43 @@
+{
+  "name": "historyBoxTrack",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "required": true,
+      "description": "Unique GUID"
+    },
+    "bussinesEntity": {
+      "type": "bussinesEntity",
+      "required": true
+    },
+    "box": {
+      "type": "box",
+      "required": true
+    },
+    "situation": {
+      "type": "string",
+      "description": "Situation about box",
+      "maxLength": 100
+    },
+    "start": {
+      "type": "string",
+      "required": true,
+      "description": "Start date-time situation",
+      "format": "date-time"
+    },
+    "end": {
+      "type": "string",
+      "description": "End date-time situation",
+      "format": "date-time"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

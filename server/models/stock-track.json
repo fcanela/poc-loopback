@@ -1,0 +1,48 @@
+{
+  "name": "stockTrack",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "bussinesEntity": {
+      "type": "bussinesEntity",
+      "required": true
+    },
+    "item": {
+      "type": "item",
+      "required": true
+    },
+    "track": {
+      "type": "string",
+      "required": true,
+      "description": "Date time for track stock",
+      "format": "date-time"
+    },
+    "type": {
+      "type": "string",
+      "required": true,
+      "description": "Type of track\n  - E: Entrada\n  - S: Salida \n",
+      "enum": [
+        "S",
+        "E"
+      ]
+    },
+    "count": {
+      "type": "number",
+      "required": true,
+      "description": "Count items track",
+      "format": "int32"
+    },
+    "description": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

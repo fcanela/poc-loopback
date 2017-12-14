@@ -1,0 +1,38 @@
+{
+  "name": "sale",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "required": true,
+      "description": "Unique GUID"
+    },
+    "employee": {
+      "type": "user",
+      "required": true
+    },
+    "approved": {
+      "type": "user",
+      "required": true
+    },
+    "price": {
+      "type": "number",
+      "required": true,
+      "description": "Final price."
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "description": "Sale status\n  - SIN CONFIRMAR\n  - CONFIRMADA\n",
+      "maxLength": 20
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
