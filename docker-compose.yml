@@ -34,6 +34,13 @@ services:
       /bin/sh -c "
         set -e
         dockerize -timeout 30s -wait tcp://$$POSTGRESQL_HOST:$$POSTGRESQL_PORT
+        #
+        # Additional checks to debug the issue. Ping to have visual confirmation
+        # of the resolved ip. psql ensuring DB is ready.
         ping -c 1 postgresql.local
+        apt-get update
+        apt-get install -y postgresql-client
+        PGPASSWORD=$$POSTGRESQL_PASSWORD psql -h $$POSTGRESQL_HOST -p $$POSTGRESQL_PORT -U $$POSTGRESQL_USER $$POSTGRESQL_DATABASE -c 'SELECT 1';
+        # Here continues the normal startup
         npm start
       "
