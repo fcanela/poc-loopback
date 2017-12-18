@@ -14,9 +14,5 @@ console.log('NODE_ENV', process.env.NODE_ENV);
 console.log('using configuration', config);
 
 module.exports = {
-  db: {
-    name: "db",
-    connector: "postgresql"
-  },
   postgresql: config
 };

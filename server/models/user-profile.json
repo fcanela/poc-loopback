@@ -10,7 +10,7 @@
       "type": "bussinesEntity"
     },
     "user": {
-      "type": "user"
+      "type": "salonUser"
     },
     "profile": {
       "type": "profile"

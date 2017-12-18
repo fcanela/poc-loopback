@@ -1,17 +1,23 @@
-version: '2'
+version: '2.1'
 services:
   postgresql:
     image: postgres:9.4-alpine
     environment:
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=12345
-      - POSTGRES_DB=dbname
+      - POSTGRES_USER=${POSTGRESQL_USER}
+      - POSTGRES_PASSWORD=${POSTGRESQL_PASSWORD}
+      - POSTGRES_DB=${POSTGRESQL_DATABASE}
     ports:
       - 5432:5432
+    healthcheck:
+      test: ["CMD", "pg_isready"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   saloon:
     depends_on:
-      - postgresql
+      postgresql:
+          condition: "service_healthy"
     links:
       - postgresql:postgresql.local
     ports:
@@ -19,28 +25,15 @@ services:
     build: .
     environment:
       - NODE_ENV=production
-      - DEBUG=false
+      - DEBUG=${DEBUG}
       - HOST=0.0.0.0
       - PORT=9000
       - TOKEN_SECRET=changeme
       - RESET_PASSWORD_TOKEN_SECRET=changeme
       - RESET_PASSWORD_TOKEN_CIPHER=changeme
-      - POSTGRESQL_HOST=postgresql.local
-      - POSTGRESQL_PORT=5432
-      - POSTGRESQL_USER=admin
-      - POSTGRESQL_PASSWORD=12345
-      - POSTGRESQL_DATABASE=dbname
-    command: >
-      /bin/sh -c "
-        set -e
-        dockerize -timeout 30s -wait tcp://$$POSTGRESQL_HOST:$$POSTGRESQL_PORT
-        #
-        # Additional checks to debug the issue. Ping to have visual confirmation
-        # of the resolved ip. psql ensuring DB is ready.
-        ping -c 1 postgresql.local
-        apt-get update
-        apt-get install -y postgresql-client
-        PGPASSWORD=$$POSTGRESQL_PASSWORD psql -h $$POSTGRESQL_HOST -p $$POSTGRESQL_PORT -U $$POSTGRESQL_USER $$POSTGRESQL_DATABASE -c 'SELECT 1';
-        # Here continues the normal startup
-        npm start
-      "
+      - POSTGRESQL_HOST=${POSTGRESQL_HOST}
+      - POSTGRESQL_PORT=${POSTGRESQL_PORT}
+      - POSTGRESQL_USER=${POSTGRESQL_USER}
+      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+      - POSTGRESQL_DATABASE=${POSTGRESQL_DATABASE}
+      - TIMEOUT=${TIMEOUT}

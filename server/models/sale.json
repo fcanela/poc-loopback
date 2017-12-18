@@ -12,11 +12,11 @@
       "description": "Unique GUID"
     },
     "employee": {
-      "type": "user",
+      "type": "salonUser",
       "required": true
     },
     "approved": {
-      "type": "user",
+      "type": "salonUser",
       "required": true
     },
     "price": {
